@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User List from API</title>
+</head>
+
+<body>
+    <h2>Users</h2>
+    <ul id="userList"></ul>
+
+    <script>
+        // 1. API endpoint
+        const apiURL = "https://jsonplaceholder.typicode.com/users";
+
+        // 2. Fetch data from API
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(users => {
+                const userList = document.getElementById("userList");
+
+                // 3. Loop through each user and create list items
+                users.forEach(user => {
+                    const li = document.createElement("li");
+                    li.textContent = `${user.name} (${user.username}) - ${user.email}`;
+                    userList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching users:", error);
+            });
+    </script>
+</body>
+
+</html>
